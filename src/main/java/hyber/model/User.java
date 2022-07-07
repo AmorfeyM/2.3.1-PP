@@ -14,14 +14,12 @@ public class User {
    private Long id;
 
    @Column(name = "firstname")
-
    private String firstName;
 
-   @Column(name = "last_name")
+   @Column(name = "lastname")
    private String lastName;
 
    @Column(name = "email")
-
    private String email;
 
    public User() {}

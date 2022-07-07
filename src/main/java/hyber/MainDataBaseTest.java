@@ -21,11 +21,5 @@ public class MainDataBaseTest {
         userService.addUser(user2);
         userService.addUser(user3);
         userService.addUser(user4);
-
-        userService.getAllUsers().stream().forEach(System.out :: println);
-        System.out.println(userService.getOneUser(1L));
-        userService.removeUserById(1L);
-
-
     }
 }

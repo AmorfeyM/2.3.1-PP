@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service
@@ -25,8 +24,13 @@ public class UserServiceImp implements UserService {
 
    @Override
    @Transactional
-   public void removeUserById(long id) {
-      userDao.removeUserById(id);
+   public void removeUser(Long id) {
+      userDao.removeUser(id);
+   }
+   @Override
+   @Transactional
+   public void updateUser(User user) {
+      userDao.updateUser(user);
    }
 
    @Override

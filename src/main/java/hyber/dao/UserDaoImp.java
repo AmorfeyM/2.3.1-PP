@@ -18,13 +18,18 @@ public class UserDaoImp implements UserDao {
     @Transactional
     public void addUser(User user) {
         entityManager.persist(user);
+
     }
 
     @Override
     @Transactional
-    public void removeUserById(long id) {
-        entityManager.createQuery("delete from User user where user.id = :userID")
-                .setParameter("userID", id).executeUpdate();
+    public void removeUser(Long id) {
+        entityManager.remove(entityManager.find(User.class, id));
+
+    }
+    @Override
+    public void updateUser(User user) {
+        entityManager.merge(user);
     }
     @Override
     public List<User> getAllUsers() {
@@ -33,10 +38,7 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User getOneUser(long id) {
-        List<User> users =  entityManager.createQuery("select user from User user where user.id = :userID", User.class)
-                .setParameter("userID", id)
-                .getResultList();
-        return users.stream().findAny().orElse(null);
+        return entityManager.find(User.class, id);
     }
 
 
