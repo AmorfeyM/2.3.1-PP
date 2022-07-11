@@ -1,9 +1,8 @@
 package web.controller;
 
-import hyber.config.DataBaseConfig;
 import hyber.model.User;
 import hyber.service.UserService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,16 +11,12 @@ import java.util.List;
 
 
 @Controller
-
 public class UserController {
 
-    private AnnotationConfigApplicationContext context;
-
-    private UserService userService;
-
-    public UserController() {
-        context = new AnnotationConfigApplicationContext(DataBaseConfig.class);
-        userService = context.getBean(UserService.class);
+    private final UserService userService;
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping(value = "/")
@@ -44,13 +39,13 @@ public class UserController {
         model.addAttribute("userToUpdate", userService.getOneUser(id));
         return "updateUser";
     }
-    @PostMapping("/updateUser")
+    @PatchMapping("/updateUser")
     public String updateUser(User user) {
         userService.updateUser(user);
         return "redirect:/";
     }
 
-    @GetMapping("/deleteUser/{id}")
+    @DeleteMapping("/deleteUser/{id}")
     public String delete(@PathVariable("id") long id) {
         userService.removeUser(id);
         return "redirect:/";

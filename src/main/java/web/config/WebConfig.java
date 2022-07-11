@@ -14,6 +14,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan("web")
+@ComponentScan("hyber")
 public class WebConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
@@ -48,4 +49,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.viewResolver(resolver);
 
     }
+
+
 }
