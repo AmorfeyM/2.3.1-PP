@@ -18,11 +18,28 @@
         <td th:text = "${user.firstName}"></td>
         <td th:text = "${user.lastName}"/></td>
         <td th:text = "${user.email}"/></td>
-        <td><a th:href="@{'/update/' + ${user.id}}">Update</a></td>
-        <td><a th:href="@{'/deleteUser/' + ${user.id}}">Delete</a></td>
+        <td>
+            <form th:method="GET" th:action="@{/update/{id}(id=${user.getId()})}">
+                <input type="submit" value="Update"/>
+            </form>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/deleteUser/{id}(id=${user.getId()})}">
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+
     </tr>
 </table>
 <input type="button" value="AddUser" onclick="window.location.href = 'viewUser'">
 
 </body>
 </html>
+
+<!--<form th:method="DELETE">-->
+<!--    <a th:href="@{'/deleteUser/' + ${user.id}}">Delete</a>-->
+<!--</form> </td>-->
+
+<!--<form th:method="PATCH">-->
+<!--    <a th:href="@{'/update/' + ${user.id}}">Update</a>-->
+<!--</form>-->

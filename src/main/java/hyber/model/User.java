@@ -1,11 +1,20 @@
 package hyber.model;
 
-import com.sun.istack.NotNull;
+import lombok.*;
+import org.hibernate.Hibernate;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-@Table(name = "users")
+@Table(name = "usr")
+
+
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class User {
 
    @Id
@@ -22,51 +31,23 @@ public class User {
    @Column(name = "email")
    private String email;
 
-   public User() {}
-
    public User(String firstName, String lastName, String email) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
    }
 
-   public Long getId() {
-      return id;
-   }
-
-   public String getFirstName() {
-      return firstName;
-   }
-
-   public String getLastName() {
-      return lastName;
-   }
-
-   public String getEmail() {
-      return email;
-   }
-
-   public void setId(Long id) {
-      this.id = id;
-   }
-
-   public void setFirstName(String firstName) {
-      this.firstName = firstName;
-   }
-
-   public void setLastName(String lastName) {
-      this.lastName = lastName;
-   }
-
-   public void setEmail(String email) {
-      this.email = email;
+   @Override
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+      User user = (User) o;
+      return id != null && Objects.equals(id, user.id);
    }
 
    @Override
-   public String toString() {
-      return "User: \n" +
-              "firstName = " + firstName + "\n" +
-              "lastName = " + lastName + "\n" +
-              "email = " + email + "\n";
+   public int hashCode() {
+
+      return Objects.hash(getFirstName(), getLastName(), getEmail());
    }
 }

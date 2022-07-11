@@ -2,27 +2,23 @@ package hyber.dao;
 
 import hyber.model.User;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Repository
-@Transactional(readOnly = true)
 public class UserDaoImp implements UserDao {
 
-   @PersistenceContext(unitName = "em")
+   @PersistenceContext
    private EntityManager entityManager;
 
     @Override
-    @Transactional
     public void addUser(User user) {
         entityManager.persist(user);
 
     }
 
     @Override
-    @Transactional
     public void removeUser(Long id) {
         entityManager.remove(entityManager.find(User.class, id));
 
