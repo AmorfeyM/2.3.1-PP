@@ -1,9 +1,7 @@
 package hyber.model;
 
-import lombok.*;
+import lombok.Data;
 import org.hibernate.Hibernate;
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -11,10 +9,7 @@ import java.util.Objects;
 @Table(name = "usr")
 
 
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Data
 public class User {
 
    @Id
@@ -30,6 +25,9 @@ public class User {
 
    @Column(name = "email")
    private String email;
+
+   public User() {
+   }
 
    public User(String firstName, String lastName, String email) {
       this.firstName = firstName;
